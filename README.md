@@ -40,6 +40,7 @@ Initial Setup on Linux:
 ```bash
 git clone git@github.com:Karl1b/polyCurve_fit.git
 cd polyCurve_fit/
+python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt 
 ```
