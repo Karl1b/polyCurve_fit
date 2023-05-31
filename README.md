@@ -97,11 +97,9 @@ After this, it's recommended to create a small Python function and run PolyCurve
 
 ```python
 from polyCurve_fit import polyCurve_fit
-
-polyCurve_fit(filename="yourdata.csv", P_initial_size=1, lower=-4, upper=4)
-polyCurve_fit(filename="yourdata.csv", P_initial_size=2, lower=-4, upper=4)
-polyCurve_fit(filename="yourdata.csv", P_initial_size=3, lower=-4, upper=4)
-polyCurve_fit(filename="yourdata.csv", P_initial_size=3, lower=-5, upper=5)
+polyCurve_fit(filename="data.csv", Parameters=2, lower=-3, upper=4)
+polyCurve_fit(filename="data.csv", Parameters=3, lower=-5, upper=5)
+polyCurve_fit(filename="data.csv", Parameters=4, lower=-5, upper=5)
 ```
 
 The above script runs PolyCurve_fit with varying polynomial sizes and exponent range, adjusting as per your needs.
