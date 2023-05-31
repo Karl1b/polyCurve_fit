@@ -151,6 +151,7 @@ def polyCurve_fit(**kwargs):
     print("##########################################")
     print(f"polyCurve_fit has finished in{total_time}s:")
     print("##########################################")
+    print("best_fit_overall")
     print(best_fit_overall)
     print("##########################################")
 

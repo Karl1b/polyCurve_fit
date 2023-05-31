@@ -19,8 +19,6 @@ polyCurve_fit(filename="pumpdata.csv", Parameters=3, lower=-3, upper=4)
 # In production you can just chain your runs like this, and you should start with the faster ones:
 # Then leave this running on your server or overnight. If you need to interupt the log files will be there.
 
-
-#polyCurve_fit(filename="pumpdata.csv", P_initial_size=1, lower=-4, upper=4)
-#polyCurve_fit(filename="pumpdata.csv", P_initial_size=2, lower=-4, upper=4)
-#polyCurve_fit(filename="pumpdata.csv", P_initial_size=3, lower=-4, upper=4)
-#polyCurve_fit(filename="pumpdata.csv", P_initial_size=3, lower=-5, upper=5)
+#polyCurve_fit(filename="data.csv", Parameters=2, lower=-3, upper=4)
+#polyCurve_fit(filename="data.csv", Parameters=3, lower=-5, upper=5)
+#polyCurve_fit(filename="data.csv", Parameters=4, lower=-5, upper=5)
