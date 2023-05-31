@@ -137,7 +137,6 @@ def polyCurve_fit(**kwargs):
     total_time = end_time - start_time
 
     def read_best_fit(worker_id, P_initial, lower, upper, filename):
-        rows = len(P_initial)
         with open(
             f"w_{worker_id}_{filename}_{len(P_initial)}_{lower}_{upper}_best.log", "r"
         ) as f:
@@ -155,8 +154,6 @@ def polyCurve_fit(**kwargs):
     print(best_fit_overall)
     print("##########################################")
 
-    with open(
-        f"best_fit_overall_{filename}_{rows}__{len(P_initial)}_{lower}_{upper}.log", "w"
-    ) as f:
+    with open(f"best_fit_{filename}_{len(P_initial)}_{lower}_{upper}.log", "w") as f:
         json.dump(best_fit_overall, f)
         f.write(f"Total time: {total_time} seconds")
