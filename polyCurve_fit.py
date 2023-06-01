@@ -18,6 +18,8 @@ def polynom(X, E, P):
     return result
 
 
+
+
 # This is the chunk generator.
 def chunking_generator(lower, upper, rows, cols, num_workers, current_worker):
     all_combinations = itertools.product(range(lower, upper + 1), repeat=rows * cols)
