@@ -39,6 +39,7 @@ def findFit(
             input_data,
             output_data,
             p0=P_initial,
+            maxfev=5000,
         )
         residuals = output_data - polynom(input_data, E, P_opt)
         SSR = np.sum(residuals**2)
