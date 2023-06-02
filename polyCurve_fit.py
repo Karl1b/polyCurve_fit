@@ -18,8 +18,6 @@ def polynom(X, E, P):
     return result
 
 
-
-
 # This is the chunk generator.
 def chunking_generator(lower, upper, rows, cols, num_workers, current_worker):
     all_combinations = itertools.product(range(lower, upper + 1), repeat=rows * cols)
@@ -110,6 +108,10 @@ def polyCurve_fit(**kwargs):
     output_data = data.iloc[:, -1]
     input_data = input_data.to_numpy()
     output_data = output_data.to_numpy()
+
+    # There have been issues for input data beeing Zero this is prevented by addind a tiny value for it.
+    input_data[input_data == 0] += 1e-8
+
     rows = len(P_initial)
     cols = input_data.shape[1]
 

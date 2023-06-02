@@ -1,63 +1,61 @@
 # PolyCurve_fit
 
-Created by Karl Breuer
-[https://www.karlbreuer.com/](https://www.karlbreuer.com/)
+Developed by Karl Breuer
+Visit my website: [https://www.karlbreuer.com/](https://www.karlbreuer.com/)
 
-## Overview
+## Introduction
 
-PolyCurve_fit is a scipy curve_fit wrapper that doesn't just find parameters for a single function but explores the best parameters for every polynomial function within a specified range. Although lightweight, it's a CPU-intensive tool designed to run overnight or on a server. However, memory usage remains constant throughout its operation.
+PolyCurve_fit is an advanced curve-fitting tool designed to explore the best parameters for polynomial functions within a user-specified range. As a scipy curve_fit wrapper, it delivers high computational performance despite its lightweight design. The tool is CPU-intensive and intended for long-duration runs, making it perfect for overnight computations or server-based usage. Yet, it maintains a constant memory footprint throughout its execution.
 
-## Potential Applications
+## Applications
 
-PolyCurve_fit is a versatile tool with a wide range of applications, particularly useful for fitting various types of data. While it was initially conceived with a focus on engineering, physical, and chemical properties, its uses extend beyond these domains. 
+PolyCurve_fit's versatility allows for wide-ranging applications across various fields. While initially designed with engineering, physics, and chemistry in mind, its utility extends far beyond.
 
 ### Engineering
 
-In engineering, you might use PolyCurve_fit to model system behaviors, optimize design parameters, or analyze performance metrics. It was developed while I did fit working curves for centrifugal pumps.
+PolyCurve_fit allows you to model system behaviors, optimize design parameters, or analyze performance metrics. It was developed originally for fitting working curves for centrifugal pumps.
 
 ### Physics
 
-In physics, PolyCurve_fit could help to uncover underlying mathematical models in experimental data, such as modelling the trajectory of a particle in a field, or fitting a curve to experimental data to determine physical constants.
+Utilize PolyCurve_fit to unearth mathematical models in experimental data, such as modelling particle trajectories in a field, or to fit curves to experimental data for determining physical constants.
 
 ### Chemistry
 
-In the field of chemistry, you could utilize PolyCurve_fit to model reaction rates, analyze spectroscopic data, or model thermodynamic properties as a function of temperature or pressure.
+In the realm of chemistry, use PolyCurve_fit to model reaction rates, analyze spectroscopic data, or model thermodynamic properties as a function of temperature or pressure.
 
-These examples only scratch the surface of the tool's potential. The power of PolyCurve_fit lies in its ability to explore a broad range of polynomial functions to provide the best fit for your data, whatever your field or data might be.
+These instances merely hint at the potential of this tool. PolyCurve_fit's power lies in its ability to survey a wide range of polynomial functions, thereby providing the optimal fit for your data, irrespective of the field or data type.
 
+## Functionality
 
-## How It Works
-
-A polynomial function can be expressed as a skeleton form and a matrix 'E' representing all exponents. 
-
-PolyCurve_fit generates all possible polynomial functions by creating unique combinations for 'E'. 
-
-This is accomplished by generating chunks and distributing these chunks evenly across all CPU cores (workers) on your machine. Each worker processes independently, logging only the currently best fit. Finally, all results are compared, and the one with the best fit is returned.
+PolyCurve_fit operates by expressing a polynomial function as a skeleton form and a matrix 'E', representing all exponents. It generates all possible polynomial functions by creating unique combinations for 'E'. This is accomplished by distributing chunks of combinations across all available CPU cores (workers) in your system. Each worker processes independently, logging the best fit it finds. Upon completion, the tool compares all results and returns the optimal fit.
 
 ## Setup
-Initial Setup on Linux:
+
+To set up PolyCurve_fit on a Linux system, execute the following commands:
 
 ```bash
 git clone git@github.com:Karl1b/polyCurve_fit.git
 cd polyCurve_fit/
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
-After this you are ready to do the testrun:
+
+Upon successful setup, run a test using:
+
 ```bash
 python testrun.py
 ```
 
 ## Usage
 
-An example script, `testrun.py`, with inline comments is provided. This script uses imaginary data for a centrifugal pump, presented in `pumpdata.csv`. Each row represents a data point, with the final entry being the result. For instance, the first data point is `100,0.309,28.5`, which denotes Q=100 m³/h impeller diameter = 0.309 m and the resulting pressure is 28.5m.
+A sample script, `testrun.py`, is provided, complete with inline comments for better understanding. This script uses fictional data for a centrifugal pump, stored in `pumpdata.csv`. Each row represents a data point, with the final entry being the result. For instance, the first data point is `100,0.309,28.5`, indicating Q=100 m³/h, impeller diameter=0.309 m, and the resultant pressure=28.5m.
 
-Run `testrun.py` to verify if you've set up PolyCurve_fit correctly on your system. The process will take approximately 1-3 minutes. During the run, the CPU will work at full load, but memory usage will remain low and stable.
+Executing `testrun.py` helps verify the proper setup of PolyCurve_fit on your system. The process will take approximately 1-3 minutes, during which your CPU will operate at full load, but memory usage will remain low and steady.
 
 ## Interpreting the Results
 
-Upon completion of the `testrun`, you will find log files for each worker and a separate log file containing the best fit. The log file with the best fit will look similar to the following:
+Upon `testrun` completion, you will find log files for each worker and a separate log file containing the best fit. Here's an example:
 
 ```
 {
@@ -65,7 +63,9 @@ Upon completion of the `testrun`, you will find log files for each worker and a 
   "SSR": 0.2509802334221808,
   "P_opt": [8702282.774546381, 2831.9150438165398, -1.2495031489638852e-07],
   "P_cov": [
-    [457980421688.7199, -10938071.113623565, 0.0010411735815124667],
+    [457980421688.7199, -10938071.113623565, 0.001041173581
+
+5124667],
     [-10938071.113623565, 502.83522199533803, -4.892526703287442e-08],
     [0.0010411735815124667, -4.892526703287442e-08, 7.0646501491573e-18]
   ],
@@ -75,7 +75,7 @@ Upon completion of the `testrun`, you will find log files for each worker and a 
 Total time: 84.75276207923889 seconds
 ```
 
-This output informs us that worker 3 found the optimal fit with the least sum of squares residual (SSR). The resulting function derived from this data is:
+The output shows that worker 3 discovered the optimal fit with the smallest sum of squares residual (SSR). The optimal function based on this output would be:
 
 ```python
 def f(X):
@@ -85,15 +85,13 @@ def f(X):
     return y
 ```
 
-In this function, each term represents a part of the polynomial, with its corresponding coefficient (`P_opt`) and exponents (`E`).
+Each term in this function corresponds to a part of the polynomial, associated with its coefficient (`P_opt`) and exponents (`E`). The `P_cov` represents the covariance matrix of the parameter estimates, derived from the `curve_fit` function of scipy.optimize.
 
-The P_cov in the output represents the covariance matrix of the parameter estimates. It is derived from the curve_fit function of scipy.optimize.
+## Implementing with Your Own Data
 
-## Fitting Your Own Data
+To use PolyCurve_fit with your own data, ensure it follows the same CSV format as `pumpdata.csv`. The last entry in every row should be the result, with the preceding entries being the parameters.
 
-To fit your own data, follow the same CSV format as in `pumpdata.csv` where the last entry in every row is the result, and the preceding entries are the parameters.
-
-After this, it's recommended to create a small Python function and run PolyCurve_fit overnight or over a weekend, potentially on a high-performance machine or server. 
+We recommend running PolyCurve_fit overnight or over a weekend, possibly on a high-performance machine or server. See the following example:
 
 ```python
 from polyCurve_fit import polyCurve_fit
@@ -102,6 +100,10 @@ polyCurve_fit(filename="data.csv", Parameters=3, lower=-5, upper=5)
 polyCurve_fit(filename="data.csv", Parameters=4, lower=-5, upper=5)
 ```
 
-The above script runs PolyCurve_fit with varying polynomial sizes and exponent range, adjusting as per your needs.
+This script runs PolyCurve_fit with different polynomial sizes and exponent ranges, which can be adjusted to meet your requirements.
 
-Have fun and may it work well for your needs.
+We hope you find this tool beneficial for your data analysis needs.
+
+## Real-World Data
+
+We have been granted permission by KSB to use real pump data for this project. You can find the curve data for 'h' from the etanorm 065-040-250 in `etanorm_h.csv`. The data includes rpm in 1/min, diameter in mm, flow in m3/h, and the resultant head in m. Please note that this data was manually transcribed from openly available charts on ksb.com and may contain errors.
