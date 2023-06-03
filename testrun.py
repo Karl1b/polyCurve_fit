@@ -5,7 +5,7 @@ from polyCurve_fit import polyCurve_fit
 # Parameters is the number of fitting Paramaters you want.
 # lower is the lower border Value for your exponents.
 # upper is the upper border value for your exponents.
-polyCurve_fit(filename="pumpdata.csv", Parameters=3, lower=-3, upper=4)
+polyCurve_fit(filename="etanorm_h.csv", Parameters=2, lower=-3, upper=5)
 
 #This is my result:
 #{"worker_id": 3, "SSR": 0.2509802334221808,
